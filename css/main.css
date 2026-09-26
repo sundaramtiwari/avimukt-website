@@ -289,12 +289,12 @@ svg { display: block; }
 .hamburger[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
 .hamburger[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
-/* Mobile panel is hidden at every width by default; only the ≤980px media
+/* Mobile panel is hidden at every width by default; only the ≤1240px media
    query (below) ever reveals it, and only once .is-open is toggled on. */
 .mobile-panel { display: none; }
 
 /* ---------- Mobile nav ---------- */
-@media (max-width: 980px) {
+@media (max-width: 1240px) {
   .nav-links, .nav-cta { display: none; }
   .hamburger { display: flex; }
   .mobile-panel {

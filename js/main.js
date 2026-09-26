@@ -38,7 +38,7 @@
 
     /* Close mobile panel on resize back to desktop */
     window.addEventListener("resize", function () {
-      if (window.innerWidth > 980 && panel.classList.contains("is-open")) {
+      if (window.innerWidth > 1240 && panel.classList.contains("is-open")) {
         panel.classList.remove("is-open");
         toggle.setAttribute("aria-expanded", "false");
         document.body.classList.remove("nav-locked");
