@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Perovskite Solar Cell Charge Controller | Avimukt Engineers Pvt Ltd</title>
+<meta name="description" content="Architecture and eight core capabilities of Avimukt Engineers' Perovskite Solar Cell Charge Controller.">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#0A1F3C">
+<link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon-32.png">
+<link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Perovskite Solar Cell Charge Controller | Avimukt Engineers Pvt Ltd">
+<meta property="og:description" content="Architecture and eight core capabilities of Avimukt Engineers' Perovskite Solar Cell Charge Controller.">
+<meta property="og:image" content="../assets/logo-512.png">
+<meta property="og:site_name" content="Avimukt Engineers Pvt Ltd">
+<meta name="twitter:card" content="summary">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/main.css">
+
+</head>
+<body class="">
+<div id="preview-ribbon"><strong>Prototype preview</strong> &mdash; content under review by Avimukt Engineers Pvt Ltd</div>
+  <header class="site-header">
+    <div class="container nav">
+      <a class="brand" href="../index.html">
+        <img src="../assets/logo.jpg" alt="Avimukt Engineers Pvt Ltd logo" width="46" height="46">
+        <span class="brand-text"><strong>AVIMUKT ENGINEERS</strong><span>Pvt. Ltd.</span></span>
+      </a>
+      <nav class="nav-links" aria-label="Primary">
+        <div class="nav-item"><a class="nav-link" href="../index.html" data-nav-path="index.html">Home</a></div>
+        <div class="nav-item">
+            <a class="nav-link" href="../about.html" data-nav-path="about.html">About Us <svg class="caret" viewBox="0 0 12 12" fill="none"><path d="M2.5 4.5L6 8L9.5 4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+            <div class="dropdown"><a href="../about.html#company">Our Company</a>
+<a href="../about.html#team">Our Team</a>
+<a href="../about.html#careers">Careers</a></div>
+          </div>
+        <div class="nav-item">
+            <a class="nav-link is-active" href="../products.html" data-nav-path="products.html">Products <svg class="caret" viewBox="0 0 12 12" fill="none"><path d="M2.5 4.5L6 8L9.5 4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+            <div class="dropdown"><a href="../products.html#categories">Product Categories</a>
+<a href="../products.html#all-products">All Products</a>
+<a href="../products/charge-controller.html">Perovskite Charge Controller</a>
+<a href="../products.html#support">Product Support</a></div>
+          </div>
+        <div class="nav-item">
+            <a class="nav-link" href="../technology.html" data-nav-path="technology.html">Technology <svg class="caret" viewBox="0 0 12 12" fill="none"><path d="M2.5 4.5L6 8L9.5 4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+            <div class="dropdown"><a href="../technology.html#overview">Technology Overview</a>
+<a href="../technology.html#innovations">Innovations</a>
+<a href="../technology.html#patents">Patents & IP</a></div>
+          </div>
+        <div class="nav-item">
+            <a class="nav-link" href="../services.html" data-nav-path="services.html">Services <svg class="caret" viewBox="0 0 12 12" fill="none"><path d="M2.5 4.5L6 8L9.5 4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+            <div class="dropdown"><a href="../services.html#consulting">Consulting</a>
+<a href="../services.html#engineering">Engineering Services</a>
+<a href="../services.html#support">Technical Support</a></div>
+          </div>
+        <div class="nav-item">
+            <a class="nav-link" href="../applications.html" data-nav-path="applications.html">Applications <svg class="caret" viewBox="0 0 12 12" fill="none"><path d="M2.5 4.5L6 8L9.5 4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+            <div class="dropdown"><a href="../applications.html#industries">Industry Applications</a>
+<a href="../applications.html#use-cases">Use Cases</a>
+<a href="../applications.html#solutions">Solutions by Application</a></div>
+          </div>
+        <div class="nav-item">
+            <a class="nav-link" href="../projects.html" data-nav-path="projects.html">Projects <svg class="caret" viewBox="0 0 12 12" fill="none"><path d="M2.5 4.5L6 8L9.5 4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+            <div class="dropdown"><a href="../projects.html#featured">Featured Projects</a>
+<a href="../projects.html#case-studies">Case Studies</a>
+<a href="../projects.html#success">Success Stories</a></div>
+          </div>
+        <div class="nav-item">
+            <a class="nav-link" href="../resources.html" data-nav-path="resources.html">Resources <svg class="caret" viewBox="0 0 12 12" fill="none"><path d="M2.5 4.5L6 8L9.5 4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+            <div class="dropdown"><a href="../resources.html#whitepapers">White Papers</a>
+<a href="../resources.html#datasheets">Datasheets & Brochures</a>
+<a href="../resources.html#webinars">Webinars & Videos</a></div>
+          </div>
+        <div class="nav-item">
+            <a class="nav-link" href="../contact.html" data-nav-path="contact.html">Contact <svg class="caret" viewBox="0 0 12 12" fill="none"><path d="M2.5 4.5L6 8L9.5 4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+            <div class="dropdown"><a href="../contact.html#contact-form">Contact Us</a>
+<a href="../contact.html#locations">Locations</a>
+<a href="../contact.html#support">Customer Support</a></div>
+          </div>
+      </nav>
+      <div class="nav-cta">
+        <a class="btn btn-secondary" href="../products.html">Products</a>
+        <a class="btn btn-primary" href="../contact.html">Get in Touch</a>
+      </div>
+      <button class="hamburger" data-nav-toggle aria-expanded="false" aria-label="Toggle navigation menu" aria-controls="mobile-panel">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <div class="mobile-panel" id="mobile-panel" data-mobile-panel>
+      <div class="m-item"><a class="m-top" style="display:flex" href="../index.html">Home</a></div>
+      <div class="m-item">
+          <div class="m-top"><span>About Us</span><svg viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="m-sub"><a href="../about.html">About Us overview</a><a href="../about.html#company">Our Company</a>
+<a href="../about.html#team">Our Team</a>
+<a href="../about.html#careers">Careers</a></div>
+        </div>
+      <div class="m-item">
+          <div class="m-top"><span>Products</span><svg viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="m-sub"><a href="../products.html">Products overview</a><a href="../products.html#categories">Product Categories</a>
+<a href="../products.html#all-products">All Products</a>
+<a href="../products/charge-controller.html">Perovskite Charge Controller</a>
+<a href="../products.html#support">Product Support</a></div>
+        </div>
+      <div class="m-item">
+          <div class="m-top"><span>Technology</span><svg viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="m-sub"><a href="../technology.html">Technology overview</a><a href="../technology.html#overview">Technology Overview</a>
+<a href="../technology.html#innovations">Innovations</a>
+<a href="../technology.html#patents">Patents & IP</a></div>
+        </div>
+      <div class="m-item">
+          <div class="m-top"><span>Services</span><svg viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="m-sub"><a href="../services.html">Services overview</a><a href="../services.html#consulting">Consulting</a>
+<a href="../services.html#engineering">Engineering Services</a>
+<a href="../services.html#support">Technical Support</a></div>
+        </div>
+      <div class="m-item">
+          <div class="m-top"><span>Applications</span><svg viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="m-sub"><a href="../applications.html">Applications overview</a><a href="../applications.html#industries">Industry Applications</a>
+<a href="../applications.html#use-cases">Use Cases</a>
+<a href="../applications.html#solutions">Solutions by Application</a></div>
+        </div>
+      <div class="m-item">
+          <div class="m-top"><span>Projects</span><svg viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="m-sub"><a href="../projects.html">Projects overview</a><a href="../projects.html#featured">Featured Projects</a>
+<a href="../projects.html#case-studies">Case Studies</a>
+<a href="../projects.html#success">Success Stories</a></div>
+        </div>
+      <div class="m-item">
+          <div class="m-top"><span>Resources</span><svg viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="m-sub"><a href="../resources.html">Resources overview</a><a href="../resources.html#whitepapers">White Papers</a>
+<a href="../resources.html#datasheets">Datasheets & Brochures</a>
+<a href="../resources.html#webinars">Webinars & Videos</a></div>
+        </div>
+      <div class="m-item">
+          <div class="m-top"><span>Contact</span><svg viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="m-sub"><a href="../contact.html">Contact overview</a><a href="../contact.html#contact-form">Contact Us</a>
+<a href="../contact.html#locations">Locations</a>
+<a href="../contact.html#support">Customer Support</a></div>
+        </div>
+      <div class="m-cta">
+        <a class="btn btn-secondary btn-block" href="../products.html">Products</a>
+        <a class="btn btn-primary btn-block" href="../contact.html">Get in Touch</a>
+      </div>
+    </div>
+  </header>
+<section class="page-hero">
+    <div class="container">
+      <div class="breadcrumb"><a href="../index.html">Home</a> <span>/</span> <a href="../products.html">Products</a> <span>/</span> <span>Charge Controller</span></div>
+      <div class="eyebrow">Flagship Product</div>
+      <h1>Perovskite Solar Cell Charge Controller</h1>
+      <p class="lead">A dedicated charge-control architecture engineered around the input characteristics of perovskite solar cells &mdash; covering everything from raw cell input to protected, monitored, logged output.</p>
+    </div>
+  </section>
+  <section class="section">
+    <div class="container">
+      <div class="section-head section-head--center" style="margin-left:auto;margin-right:auto;">
+        <div class="eyebrow" style="justify-content:center;">Architecture</div>
+        <h2>Input &rarr; controlled charging &rarr; output, with four supporting layers</h2>
+        <p>The block diagram below shows how the eight core capabilities relate: a main flow from solar-cell input through the controlled charging stage to the battery or test platform, with monitoring, parameters, protection, logging and communication layered around the core controller.</p>
+      </div>
+      <div class="diagram-wrap reveal">
+        <svg viewBox="0 0 1100 470" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="ccDiagramTitle ccDiagramDesc">
+  <title id="ccDiagramTitle">Perovskite Solar Cell Charge Controller — architecture diagram</title>
+  <desc id="ccDiagramDesc">Block diagram showing solar-cell input flowing into a controlled charging stage and out to a battery or test platform, with voltage/current monitoring, programmable parameters, protection, data logging and a user interface layered around the core controller.</desc>
+  <defs>
+    <linearGradient id="coreGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1E6FD0"/>
+      <stop offset="100%" stop-color="#0B3A6E"/>
+    </linearGradient>
+    <marker id="arrowHead" markerWidth="9" markerHeight="9" refX="7" refY="4" orient="auto">
+      <path d="M0,0 L8,4 L0,8 Z" fill="#F4B63A"/>
+    </marker>
+    <marker id="arrowHeadStart" markerWidth="9" markerHeight="9" refX="1" refY="4" orient="auto-start-reverse">
+      <path d="M0,0 L8,4 L0,8 Z" fill="#F4B63A"/>
+    </marker>
+  </defs>
+  <text x="550" y="18" text-anchor="middle" font-family="Space Grotesk, sans-serif" font-size="13" font-weight="600" letter-spacing="1.5" fill="#F4B63A">CHARGE CONTROLLER — FUNCTIONAL ARCHITECTURE</text>
+
+  <line x1="155.0" y1="100.0" x2="155.0" y2="168.0" stroke="#5C86BE" stroke-width="1.8" marker-end="url(#arrowHead)"/>
+  <line x1="550.0" y1="100.0" x2="550.0" y2="168.0" stroke="#5C86BE" stroke-width="1.8" marker-end="url(#arrowHead)" marker-start="url(#arrowHeadStart)"/>
+  <line x1="945.0" y1="100.0" x2="945.0" y2="168.0" stroke="#5C86BE" stroke-width="1.8" marker-end="url(#arrowHead)" marker-start="url(#arrowHeadStart)"/>
+  <line x1="155.0" y1="264.0" x2="155.0" y2="314.0" stroke="#5C86BE" stroke-width="1.8" marker-end="url(#arrowHead)"/>
+  <line x1="550.0" y1="264.0" x2="550.0" y2="314.0" stroke="#5C86BE" stroke-width="1.8" marker-end="url(#arrowHead)" marker-start="url(#arrowHeadStart)"/>
+  <line x1="270.0" y1="216.0" x2="430.0" y2="216.0" stroke="#F4B63A" stroke-width="1.8" marker-end="url(#arrowHead)"/>
+  <line x1="670.0" y1="216.0" x2="830.0" y2="216.0" stroke="#F4B63A" stroke-width="1.8" marker-end="url(#arrowHead)"/>
+
+  <rect x="40.0" y="30.0" width="230.0" height="70.0" rx="12" fill="#123B6B" stroke="#2C5C93" stroke-width="1.4"/>
+<text x="155.0" y="67.7" text-anchor="middle" font-family="Space Grotesk, sans-serif" font-size="13" font-weight="600" fill="#EAF1FB">Programmable Operating</text>
+<text x="155.0" y="82.7" text-anchor="middle" font-family="Space Grotesk, sans-serif" font-size="13" font-weight="600" fill="#EAF1FB">Parameters</text>
+<circle cx="58.0" cy="28.0" r="12" fill="#F4B63A"/>
+<text x="58.0" y="32.5" text-anchor="middle" font-family="Space Grotesk, sans-serif" font-size="12" font-weight="700" fill="#0A1F3C">4</text>
+  <rect x="430.0" y="30.0" width="240.0" height="70.0" rx="12" fill="#123B6B" stroke="#2C5C93" stroke-width="1.4"/>
+<text x="550.0" y="75.2" text-anchor="middle" font-family="Space Grotesk, sans-serif" font-size="13" font-weight="600" fill="#EAF1FB">Voltage &amp; Current Monitoring</text>
+<circle cx="448.0" cy="28.0" r="12" fill="#F4B63A"/>
+<text x="448.0" y="32.5" text-anchor="middle" font-family="Space Grotesk, sans-serif" font-size="12" font-weight="700" fill="#0A1F3C">3</text>
+  <rect x="830.0" y="30.0" width="230.0" height="70.0" rx="12" fill="#123B6B" stroke="#2C5C93" stroke-width="1.4"/>
+<text x="945.0" y="67.7" text-anchor="middle" font-family="Space Grotesk, sans-serif" font-size="13" font-weight="600" fill="#EAF1FB">User Interface / Digital</text>
+<text x="945.0" y="82.7" text-anchor="middle" font-family="Space Grotesk, sans-serif" font-size="13" font-weight="600" fill="#EAF1FB">Communication</text>
+<circle cx="848.0" cy="28.0" r="12" fill="#F4B63A"/>
+<text x="848.0" y="32.5" text-anchor="middle" font-family="Space Grotesk, sans-serif" font-size="12" font-weight="700" fill="#0A1F3C">7</text>
+  <rect x="40.0" y="168.0" width="230.0" height="96.0" rx="12" fill="#123B6B" stroke="#2C5C93" stroke-width="1.4"/>
+<text x="155.0" y="226.2" text-anchor="middle" font-family="Space Grotesk, sans-serif" font-size="13" font-weight="600" fill="#EAF1FB">Solar-Cell Input Interface</text>
+<circle cx="58.0" cy="166.0" r="12" fill="#F4B63A"/>
+<text x="58.0" y="170.5" text-anchor="middle" font-family="Space Grotesk, sans-serif" font-size="12" font-weight="700" fill="#0A1F3C">1</text>
+  <rect x="430.0" y="168.0" width="240.0" height="96.0" rx="12" fill="url(#coreGrad)" stroke="#F4B63A" stroke-width="1.4"/>
+<text x="550.0" y="226.2" text-anchor="middle" font-family="Space Grotesk, sans-serif" font-size="13" font-weight="600" fill="#ffffff">Controlled Charging Stage</text>
+<circle cx="448.0" cy="166.0" r="12" fill="#F4B63A"/>
+<text x="448.0" y="170.5" text-anchor="middle" font-family="Space Grotesk, sans-serif" font-size="12" font-weight="700" fill="#0A1F3C">2</text>
+  <rect x="830.0" y="168.0" width="230.0" height="96.0" rx="12" fill="#123B6B" stroke="#2C5C93" stroke-width="1.4"/>
+<text x="945.0" y="218.7" text-anchor="middle" font-family="Space Grotesk, sans-serif" font-size="13" font-weight="600" fill="#EAF1FB">Custom Integration — Battery /</text>
+<text x="945.0" y="233.7" text-anchor="middle" font-family="Space Grotesk, sans-serif" font-size="13" font-weight="600" fill="#EAF1FB">Test Platform</text>
+<circle cx="848.0" cy="166.0" r="12" fill="#F4B63A"/>
+<text x="848.0" y="170.5" text-anchor="middle" font-family="Space Grotesk, sans-serif" font-size="12" font-weight="700" fill="#0A1F3C">8</text>
+  <rect x="40.0" y="314.0" width="230.0" height="70.0" rx="12" fill="#123B6B" stroke="#2C5C93" stroke-width="1.4"/>
+<text x="155.0" y="351.7" text-anchor="middle" font-family="Space Grotesk, sans-serif" font-size="13" font-weight="600" fill="#EAF1FB">Protection &amp; Fault</text>
+<text x="155.0" y="366.7" text-anchor="middle" font-family="Space Grotesk, sans-serif" font-size="13" font-weight="600" fill="#EAF1FB">Management</text>
+<circle cx="58.0" cy="312.0" r="12" fill="#F4B63A"/>
+<text x="58.0" y="316.5" text-anchor="middle" font-family="Space Grotesk, sans-serif" font-size="12" font-weight="700" fill="#0A1F3C">5</text>
+  <rect x="430.0" y="314.0" width="240.0" height="70.0" rx="12" fill="#123B6B" stroke="#2C5C93" stroke-width="1.4"/>
+<text x="550.0" y="359.2" text-anchor="middle" font-family="Space Grotesk, sans-serif" font-size="13" font-weight="600" fill="#EAF1FB">Data Acquisition &amp; Logging</text>
+<circle cx="448.0" cy="312.0" r="12" fill="#F4B63A"/>
+<text x="448.0" y="316.5" text-anchor="middle" font-family="Space Grotesk, sans-serif" font-size="12" font-weight="700" fill="#0A1F3C">6</text>
+</svg>
+      </div>
+      <p class="muted text-center" style="margin-top:18px;font-size:0.86rem;">Functional block diagram &mdash; illustrative of control architecture, not a wiring or circuit-level schematic.</p>
+    </div>
+  </section>
+
+  <section class="section section--tint">
+    <div class="container">
+      <div class="section-head">
+        <div class="eyebrow">Eight Core Capabilities</div>
+        <h2>What the controller does, end to end</h2>
+      </div>
+      <div class="grid grid-4">
+        <div class="card reveal">
+          <span class="tag">Capability 1</span>
+          <h3>Solar-cell input interface</h3>
+          <p>Accepts the raw electrical output of the perovskite solar cell as the controller's input stage.</p>
+        </div>
+<div class="card reveal">
+          <span class="tag">Capability 2</span>
+          <h3>Controlled charging stage</h3>
+          <p>Manages the charging profile applied to the connected battery or load, tuned to the cell's characteristics.</p>
+        </div>
+<div class="card reveal">
+          <span class="tag">Capability 3</span>
+          <h3>Voltage and current monitoring</h3>
+          <p>Continuously tracks voltage and current through the charging path to inform control decisions.</p>
+        </div>
+<div class="card reveal">
+          <span class="tag">Capability 4</span>
+          <h3>Programmable operating parameters</h3>
+          <p>Operating thresholds and behaviour can be configured for the specific deployment or test scenario.</p>
+        </div>
+<div class="card reveal">
+          <span class="tag">Capability 5</span>
+          <h3>Protection and fault management</h3>
+          <p>Guards the charging path and connected load against fault conditions.</p>
+        </div>
+<div class="card reveal">
+          <span class="tag">Capability 6</span>
+          <h3>Data acquisition and logging</h3>
+          <p>Captures operational data over time for analysis, diagnostics or reporting.</p>
+        </div>
+<div class="card reveal">
+          <span class="tag">Capability 7</span>
+          <h3>User interface or digital communication</h3>
+          <p>Provides a way to observe status and exchange data with an external system.</p>
+        </div>
+<div class="card reveal">
+          <span class="tag">Capability 8</span>
+          <h3>Custom integration with battery or test platform</h3>
+          <p>Adapts the controller's output stage to the specific battery chemistry or test rig in use.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="grid grid-2" style="gap:56px;">
+        <div class="reveal">
+          <div class="eyebrow">Why It's Different</div>
+          <h2>Built for perovskite, not adapted from silicon</h2>
+          <p>Generic solar charge controllers are designed around the electrical behaviour of conventional silicon cells. Avimukt's controller is engineered specifically around perovskite solar-cell input characteristics, so the charging stage, monitoring thresholds and protection logic are matched to the cell technology it serves.</p>
+          <p>Because operating parameters are programmable and the platform supports digital communication, the same core controller can be configured across research bench setups, prototype platforms and fielded systems.</p>
+        </div>
+        <div class="card card--flat reveal">
+          <div class="placeholder-card reveal">
+        <span class="placeholder-tag"><svg viewBox="0 0 24 24" fill="none"><path d="M12 3l9.5 17H2.5L12 3z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M12 9.5v4.2" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/><circle cx="12" cy="17" r="0.9" fill="currentColor"/></svg> Content to be provided by Avimukt</span>
+        <h4>Detailed Specifications</h4>
+        <p>Exact voltage/current ratings, dimensions, connector types and environmental ratings will be published here once finalised by Avimukt&rsquo;s engineering team.</p>
+      </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--navy">
+    <div class="container">
+      <div class="cta-band" style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.14);">
+        <div>
+          <h2>Evaluating this controller for your platform?</h2>
+          <p>Talk to our engineering team about your battery chemistry, cell configuration or test-platform requirements.</p>
+        </div>
+        <div class="cta-actions">
+          <a class="btn btn-primary" href="../contact.html">Request a Technical Discussion</a>
+          <a class="btn btn-secondary" href="../resources.html#datasheets">Datasheets</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+<footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div class="footer-brand">
+            <img src="../assets/logo.jpg" alt="Avimukt Engineers Pvt Ltd logo">
+            <span><strong>AVIMUKT ENGINEERS</strong><span>Pvt. Ltd.</span></span>
+          </div>
+          <p class="tag-line">Advanced perovskite solar cells and precision power electronics for defence, research and clean-energy programmes.</p>
+          <p class="tag-line" style="margin-top:14px;"><a href="mailto:sales@avimuktengineers.in" style="color:var(--gold);">sales@avimuktengineers.in</a></p>
+        </div>
+        <div class="footer-col">
+          <h5>Company</h5>
+          <a href="../about.html">Our Company</a>
+          <a href="../about.html#team">Our Team</a>
+          <a href="../about.html#careers">Careers</a>
+          <a href="../projects.html">Projects</a>
+        </div>
+        <div class="footer-col">
+          <h5>Offerings</h5>
+          <a href="../products.html">Products</a>
+          <a href="../technology.html">Technology</a>
+          <a href="../services.html">Services</a>
+          <a href="../applications.html">Applications</a>
+        </div>
+        <div class="footer-col">
+          <h5>Resources</h5>
+          <a href="../resources.html#whitepapers">White Papers</a>
+          <a href="../resources.html#datasheets">Datasheets</a>
+          <a href="../resources.html#webinars">Webinars &amp; Videos</a>
+        </div>
+        <div class="footer-col">
+          <h5>Contact</h5>
+          <a href="../contact.html">Contact Us</a>
+          <a href="../contact.html#locations">Locations</a>
+          <a href="../contact.html#support">Customer Support</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; <span data-year>2026</span> Avimukt Engineers Pvt Ltd. All rights reserved.</span>
+        <div class="footer-legal-links">
+          <a href="../contact.html">Contact</a>
+          <a href="../resources.html">Resources</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+<script src="../js/main.js"></script>
+</body>
+</html>
