@@ -261,6 +261,7 @@ svg { display: block; }
   font-weight: 500;
 }
 .dropdown a:hover { background: var(--blue-soft); color: var(--navy); }
+.dropdown a.sub-link { padding-left: 26px; font-size: 0.84rem; }
 
 .nav-cta { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
 .nav-cta .btn { padding: 10px 20px; font-size: 0.88rem; }
@@ -337,6 +338,7 @@ svg { display: block; }
     color: var(--slate);
     font-size: 0.95rem;
   }
+  .mobile-panel .m-sub a.sub-link { padding-left: 16px; font-size: 0.87rem; }
   .mobile-panel .m-cta { padding: 22px 4px 0; display: flex; flex-direction: column; gap: 10px; }
   body.nav-locked { overflow: hidden; }
 }
