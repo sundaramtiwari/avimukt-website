@@ -1,11 +1,13 @@
 /**
- * AVIMUKT ENGINEERS PVT LTD — AEROSPACE & DEEP-TECH HARDWARE SUITE
- * Signature "Photon to Regulated Load" Interactive Simulator Engine & Core Scripts
+ * AVIMUKT ENGINEERS PVT LTD — DEEP-TECH AEROSPACE DIGITAL SUITE
+ * Interactive 3D Hero Hardware Canvas & "Photon to Regulated Load" Simulator Engine
  */
 
 document.addEventListener('DOMContentLoaded', () => {
   initLiveClock();
   initMobileMenu();
+  initHeroHardwareCanvas();
+  initHeroCardTilt();
   initSimulatorEngine();
   initRfqHandler();
 });
@@ -39,7 +41,6 @@ function initMobileMenu() {
     toggleBtn.setAttribute('aria-expanded', isOpen);
   });
 
-  // Close on navigation click
   drawer.querySelectorAll('a').forEach(link => {
     link.addEventListener('click', () => {
       drawer.classList.remove('is-open');
@@ -49,33 +50,217 @@ function initMobileMenu() {
 }
 
 /* ==========================================================================
-   3. THE SIGNATURE "HOW IT WORKS" INTERACTIVE SIMULATOR (PART 3)
+   3. Interactive 3D Hero Hardware Canvas (Photon Flux -> Perovskite Layer)
+   ========================================================================== */
+function initHeroHardwareCanvas() {
+  const canvas = document.getElementById('hero-cell-canvas');
+  if (!canvas) return;
+
+  const ctx = canvas.getContext('2d');
+  let animationFrameId;
+  let width, height;
+
+  function resize() {
+    width = canvas.parentElement.clientWidth;
+    height = canvas.parentElement.clientHeight || 240;
+    canvas.width = width * window.devicePixelRatio;
+    canvas.height = height * window.devicePixelRatio;
+    ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  // Particles: Photons (Gold) & Electrons (Cyan)
+  const photons = [];
+  const electrons = [];
+  const particleCount = 28;
+
+  for (let i = 0; i < particleCount; i++) {
+    photons.push({
+      x: Math.random() * (width * 0.6) + (width * 0.2),
+      y: Math.random() * 40,
+      speed: 1.5 + Math.random() * 2,
+      length: 8 + Math.random() * 12,
+      opacity: 0.4 + Math.random() * 0.6
+    });
+  }
+
+  let angle = 0;
+
+  function draw() {
+    ctx.clearRect(0, 0, width, height);
+
+    // 1. Draw 3D Isometric Perovskite Cell Stack in Center
+    const centerX = width * 0.5;
+    const centerY = height * 0.58;
+    const cellW = Math.min(width * 0.55, 180);
+    const cellH = cellW * 0.45;
+    const depth = 14;
+
+    // Bottom Substrate (Slate)
+    ctx.fillStyle = "rgba(30, 41, 59, 0.8)";
+    ctx.strokeStyle = "rgba(255, 255, 255, 0.15)";
+    ctx.lineWidth = 1;
+    drawIsoBlock(ctx, centerX, centerY + depth, cellW, cellH, depth, "#0F172A", "rgba(56, 189, 248, 0.2)");
+
+    // Active Perovskite Layer (Iridescent Obsidian Blue)
+    drawIsoBlock(ctx, centerX, centerY, cellW, cellH, 6, "#1E3A8A", "#F5A623");
+
+    // Gold Contact Edge Tabs
+    drawTab(ctx, centerX - cellW * 0.5 - 6, centerY - 2, 10, 16, "#F5A623");
+    drawTab(ctx, centerX + cellW * 0.5 + 6, centerY - 2, 10, 16, "#64748B");
+
+    // 2. Animate Incoming Photons (Golden light rays)
+    ctx.lineWidth = 1.5;
+    photons.forEach(p => {
+      ctx.strokeStyle = `rgba(245, 166, 35, ${p.opacity})`;
+      ctx.beginPath();
+      ctx.moveTo(p.x, p.y);
+      ctx.lineTo(p.x - 4, p.y + p.length);
+      ctx.stroke();
+
+      p.y += p.speed;
+      p.x -= p.speed * 0.25;
+
+      if (p.y > centerY - 10) {
+        // Impact at cell surface: spawn electron pulse
+        if (Math.random() > 0.6 && electrons.length < 24) {
+          electrons.push({
+            x: p.x,
+            y: centerY - Math.random() * 8,
+            targetX: (Math.random() > 0.5 ? centerX - cellW * 0.5 : centerX + cellW * 0.5),
+            progress: 0,
+            speed: 0.04 + Math.random() * 0.03
+          });
+        }
+        p.y = 0;
+        p.x = Math.random() * (width * 0.6) + (width * 0.2);
+      }
+    });
+
+    // 3. Animate Electrons flowing towards contact tabs (Cyan glowing pulses)
+    for (let i = electrons.length - 1; i >= 0; i--) {
+      const e = electrons[i];
+      e.progress += e.speed;
+      const curX = e.x + (e.targetX - e.x) * e.progress;
+      const curY = e.y + Math.sin(e.progress * Math.PI) * 4;
+
+      ctx.fillStyle = "#00F0FF";
+      ctx.shadowColor = "#00F0FF";
+      ctx.shadowBlur = 8;
+      ctx.beginPath();
+      ctx.arc(curX, curY, 2.2, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.shadowBlur = 0;
+
+      if (e.progress >= 1) {
+        electrons.splice(i, 1);
+      }
+    }
+
+    // Layer Label
+    ctx.font = "600 10px 'JetBrains Mono', monospace";
+    ctx.fillStyle = "#FFC453";
+    ctx.textAlign = "center";
+    ctx.fillText("PEROVSKITE ACTIVE LAYER (UNENCAPSULATED)", centerX, height - 12);
+
+    angle += 0.02;
+    animationFrameId = requestAnimationFrame(draw);
+  }
+
+  function drawIsoBlock(c, cx, cy, w, h, d, faceColor, edgeColor) {
+    // Top face
+    c.fillStyle = faceColor;
+    c.strokeStyle = edgeColor;
+    c.beginPath();
+    c.moveTo(cx, cy - h * 0.5);
+    c.lineTo(cx + w * 0.5, cy);
+    c.lineTo(cx, cy + h * 0.5);
+    c.lineTo(cx - w * 0.5, cy);
+    c.closePath();
+    c.fill();
+    c.stroke();
+
+    // Front Left face
+    c.fillStyle = "rgba(10, 15, 26, 0.9)";
+    c.beginPath();
+    c.moveTo(cx - w * 0.5, cy);
+    c.lineTo(cx, cy + h * 0.5);
+    c.lineTo(cx, cy + h * 0.5 + d);
+    c.lineTo(cx - w * 0.5, cy + d);
+    c.closePath();
+    c.fill();
+    c.stroke();
+
+    // Front Right face
+    c.fillStyle = "rgba(15, 23, 42, 0.95)";
+    c.beginPath();
+    c.moveTo(cx + w * 0.5, cy);
+    c.lineTo(cx, cy + h * 0.5);
+    c.lineTo(cx, cy + h * 0.5 + d);
+    c.lineTo(cx + w * 0.5, cy + d);
+    c.closePath();
+    c.fill();
+    c.stroke();
+  }
+
+  function drawTab(c, x, y, w, h, color) {
+    c.fillStyle = color;
+    c.shadowColor = color;
+    c.shadowBlur = 6;
+    c.fillRect(x - w * 0.5, y - h * 0.5, w, h);
+    c.shadowBlur = 0;
+  }
+
+  draw();
+}
+
+/* ==========================================================================
+   4. Hero Card 3D Magnetic Tilt
+   ========================================================================== */
+function initHeroCardTilt() {
+  const card = document.querySelector('[data-tilt-stage]');
+  if (!card) return;
+
+  card.addEventListener('mousemove', (e) => {
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left - rect.width / 2;
+    const y = e.clientY - rect.top - rect.height / 2;
+    const rotateX = (-y / rect.height) * 8;
+    const rotateY = (x / rect.width) * 8;
+
+    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-2px)`;
+  });
+
+  card.addEventListener('mouseleave', () => {
+    card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0)`;
+  });
+}
+
+/* ==========================================================================
+   5. THE SIGNATURE "HOW IT WORKS" INTERACTIVE SIMULATOR (PART 3)
    ========================================================================== */
 function initSimulatorEngine() {
   const container = document.getElementById('interactive-simulator');
   if (!container) return;
 
-  // State Management
   const state = {
-    activePhase: 1, // 1: Single Cell, 2: Array Synthesis, 3: Charge Controller, 4: Regulated Load
-    irradiance: 1000, // W/m^2 (Standard AM1.5)
-    arrayConfig: 'series-parallel', // 'single', 'series', 'parallel', 'series-parallel'
-    activeCapability: 2, // 1 through 8
-    targetLoad: 'balloon', // 'balloon', 'soldier', 'avionics'
-    faultActive: false,
-    cellType: 'stratospheric-4in' // or 'conformal-2in'
+    activePhase: 1,
+    irradiance: 1000,
+    arrayConfig: 'series-parallel',
+    activeCapability: 2,
+    targetLoad: 'balloon',
+    faultActive: false
   };
 
-  // DOM Elements
   const stepButtons = container.querySelectorAll('.sim-step-btn');
-  const irradianceSlider = container.getElementById ? container.getElementById('sim-irradiance') : document.getElementById('sim-irradiance');
+  const irradianceSlider = document.getElementById('sim-irradiance');
   const irradianceVal = document.getElementById('sim-irradiance-val');
   const arrayToggles = container.querySelectorAll('[data-array-mode]');
   const capItems = container.querySelectorAll('.sim-cap-item');
   const loadToggles = container.querySelectorAll('[data-load-target]');
   const faultBtn = document.getElementById('sim-fault-btn');
   
-  // HUD Readout Elements
   const readoutVoltage = document.getElementById('readout-voltage');
   const readoutCurrent = document.getElementById('readout-current');
   const readoutPower = document.getElementById('readout-power');
@@ -83,7 +268,6 @@ function initSimulatorEngine() {
   const simStageDesc = document.getElementById('sim-stage-desc');
   const svgCanvas = document.getElementById('sim-svg-canvas');
 
-  // Step Switchers
   stepButtons.forEach(btn => {
     btn.addEventListener('click', () => {
       const step = parseInt(btn.getAttribute('data-step'), 10);
@@ -100,7 +284,6 @@ function initSimulatorEngine() {
     renderSimulation();
   }
 
-  // Irradiance Slider
   if (irradianceSlider) {
     irradianceSlider.addEventListener('input', (e) => {
       state.irradiance = parseInt(e.target.value, 10);
@@ -109,7 +292,6 @@ function initSimulatorEngine() {
     });
   }
 
-  // Array Mode Switcher
   arrayToggles.forEach(toggle => {
     toggle.addEventListener('click', () => {
       arrayToggles.forEach(t => t.classList.remove('is-active'));
@@ -119,7 +301,6 @@ function initSimulatorEngine() {
     });
   });
 
-  // Controller Capability Quick Select
   capItems.forEach(item => {
     item.addEventListener('click', () => {
       capItems.forEach(i => i.classList.remove('is-active'));
@@ -129,7 +310,6 @@ function initSimulatorEngine() {
     });
   });
 
-  // Target Load Switcher
   loadToggles.forEach(toggle => {
     toggle.addEventListener('click', () => {
       loadToggles.forEach(t => t.classList.remove('is-active'));
@@ -139,7 +319,6 @@ function initSimulatorEngine() {
     });
   });
 
-  // Fault Trigger
   if (faultBtn) {
     faultBtn.addEventListener('click', () => {
       state.faultActive = !state.faultActive;
@@ -151,22 +330,18 @@ function initSimulatorEngine() {
     });
   }
 
-  // Core Math & SVG Renderer
   function renderSimulation() {
-    // 1. Calculate Physical Numbers
     const sunRatio = state.irradiance / 1000;
-    let rawVoc = 1.15; // Volts per cell open circuit
-    let rawIsc = 0.85 * sunRatio; // Amps per cell
+    const rawVoc = 1.15;
+    const rawIsc = 0.85 * sunRatio;
 
     let totalVoltage = rawVoc;
     let totalCurrent = rawIsc;
 
     if (state.activePhase === 1) {
-      // Single cell
       totalVoltage = rawVoc;
       totalCurrent = rawIsc;
     } else if (state.activePhase >= 2) {
-      // Array configuration
       switch (state.arrayConfig) {
         case 'series':
           totalVoltage = rawVoc * 4;
@@ -186,19 +361,18 @@ function initSimulatorEngine() {
 
     let regulatedVoltage = totalVoltage;
     let regulatedCurrent = totalCurrent;
-    let efficiency = 94.8; // High efficiency power electronics
+    let efficiency = 95.2;
     let statusText = "NOMINAL CHARGING";
 
     if (state.activePhase >= 3) {
-      // Regulate to target load voltage
       if (state.targetLoad === 'balloon') {
-        regulatedVoltage = 12.0; // Stratospheric battery bus
+        regulatedVoltage = 12.0;
         regulatedCurrent = (totalVoltage * totalCurrent * (efficiency / 100)) / regulatedVoltage;
       } else if (state.targetLoad === 'soldier') {
-        regulatedVoltage = 5.0; // USB / Wearable bus
+        regulatedVoltage = 5.0;
         regulatedCurrent = (totalVoltage * totalCurrent * (efficiency / 100)) / regulatedVoltage;
       } else {
-        regulatedVoltage = 24.0; // Avionics test bench
+        regulatedVoltage = 24.0;
         regulatedCurrent = (totalVoltage * totalCurrent * (efficiency / 100)) / regulatedVoltage;
       }
     }
@@ -214,16 +388,12 @@ function initSimulatorEngine() {
       (regulatedVoltage * regulatedCurrent) : 
       (totalVoltage * totalCurrent);
 
-    // Update Telemetry Display
     if (readoutVoltage) readoutVoltage.textContent = (state.faultActive ? '0.00 V' : `${totalVoltage.toFixed(2)} V`);
     if (readoutCurrent) readoutCurrent.textContent = (state.faultActive ? '0.00 A' : `${totalCurrent.toFixed(2)} A`);
     if (readoutPower) readoutPower.textContent = (state.faultActive ? '0.00 W' : `${totalPower.toFixed(2)} W`);
     if (readoutEfficiency) readoutEfficiency.textContent = `${efficiency.toFixed(1)}%`;
 
-    // Update Stage Explanatory Text
     updateStageDescription(statusText);
-
-    // Draw Dynamic SVG Circuit
     renderSvgGraphics(totalVoltage, totalCurrent, totalPower);
   }
 
@@ -252,9 +422,6 @@ function initSimulatorEngine() {
     if (!svgCanvas) return;
 
     const isPhase1 = state.activePhase === 1;
-    const isPhase2 = state.activePhase === 2;
-    const isPhase3 = state.activePhase === 3;
-    const isPhase4 = state.activePhase === 4;
 
     const photonRays = Array.from({length: 6}, (_, idx) => {
       const x = 70 + idx * 30;
@@ -283,10 +450,8 @@ function initSimulatorEngine() {
       </defs>
     `;
 
-    // 1. Draw Solar Cell Stage (Left)
     if (isPhase1) {
       svgContent += `
-        <!-- Single 4" Perovskite Cell -->
         <g transform="translate(60, 90)">
           ${photonRays}
           <rect x="0" y="0" width="180" height="150" rx="8" fill="url(#cellGrad)" stroke="${state.faultActive ? '#EF4444' : '#F5A623'}" stroke-width="2" />
@@ -294,23 +459,19 @@ function initSimulatorEngine() {
           <text x="90" y="85" text-anchor="middle" fill="#F5A623" font-family="JetBrains Mono, monospace" font-size="11">ACTIVE LAYER</text>
           <text x="90" y="110" text-anchor="middle" fill="#94A3B8" font-family="JetBrains Mono, monospace" font-size="10">Unencapsulated</text>
 
-          <!-- Contact Tabs -->
           <rect x="-15" y="40" width="15" height="24" rx="2" fill="#F5A623" filter="url(#glowGold)"/>
           <text x="-7" y="56" text-anchor="middle" fill="#000" font-family="JetBrains Mono" font-size="10" font-weight="700">+</text>
           
           <rect x="-15" y="90" width="15" height="24" rx="2" fill="#64748B"/>
           <text x="-7" y="106" text-anchor="middle" fill="#FFF" font-family="JetBrains Mono" font-size="10" font-weight="700">-</text>
 
-          <!-- Flow out -->
           <path d="M 180 75 L 340 75" fill="none" stroke="#F5A623" stroke-width="3" class="flowing-line"/>
           <circle cx="260" cy="75" r="4" fill="#00E5FF" filter="url(#glowCyan)"/>
         </g>
       `;
     } else {
-      // Array Stage (4 cells interconnected)
       svgContent += `
         <g transform="translate(40, 80)">
-          <!-- 4 Cell Array Representation -->
           <g transform="translate(0, 0)">
             <rect x="0" y="0" width="80" height="65" rx="4" fill="url(#cellGrad)" stroke="#F5A623" stroke-width="1.5"/>
             <text x="40" y="38" text-anchor="middle" fill="#FFF" font-family="JetBrains Mono" font-size="9">CELL 1</text>
@@ -328,14 +489,12 @@ function initSimulatorEngine() {
             <text x="40" y="38" text-anchor="middle" fill="#FFF" font-family="JetBrains Mono" font-size="9">CELL 4</text>
           </g>
 
-          <!-- Interconnect bus -->
           <path d="M 80 32 L 90 32 M 80 107 L 90 107 M 170 70 L 250 70" fill="none" stroke="#F5A623" stroke-width="2.5" class="flowing-line"/>
           <text x="85" y="160" text-anchor="middle" fill="#F5A623" font-family="JetBrains Mono" font-size="10">${state.arrayConfig.toUpperCase()} ARRAY</text>
         </g>
       `;
     }
 
-    // 2. Draw Controller Architecture (Center)
     svgContent += `
       <g transform="translate(300, 50)">
         <rect x="0" y="0" width="340" height="230" rx="10" fill="url(#controllerGrad)" stroke="${state.faultActive ? '#EF4444' : '#00E5FF'}" stroke-width="1.8"/>
@@ -344,55 +503,41 @@ function initSimulatorEngine() {
           PEROVSKITE CHARGE CONTROLLER
         </text>
 
-        <!-- 8 Core Capabilities Schematic Blocks -->
-        <!-- 1: Solar Input -->
         <rect x="15" y="40" width="95" height="40" rx="4" fill="${state.activeCapability === 1 ? 'rgba(245,166,35,0.3)' : 'rgba(255,255,255,0.05)'}" stroke="#F5A623" stroke-width="1"/>
         <text x="62" y="64" text-anchor="middle" fill="#FFF" font-family="JetBrains Mono" font-size="8.5">1. Input Stage</text>
 
-        <!-- 2: Controlled Charging (Core) -->
         <rect x="120" y="40" width="100" height="40" rx="4" fill="${state.activeCapability === 2 ? 'rgba(0,229,255,0.3)' : 'rgba(0,229,255,0.1)'}" stroke="#00E5FF" stroke-width="${state.activeCapability === 2 ? '2' : '1'}"/>
         <text x="170" y="64" text-anchor="middle" fill="#00E5FF" font-family="JetBrains Mono" font-size="8.5" font-weight="700">2. Control Stage</text>
 
-        <!-- 8: Output Integration -->
         <rect x="230" y="40" width="95" height="40" rx="4" fill="${state.activeCapability === 8 ? 'rgba(16,185,129,0.3)' : 'rgba(255,255,255,0.05)'}" stroke="#10B981" stroke-width="1"/>
         <text x="277" y="64" text-anchor="middle" fill="#FFF" font-family="JetBrains Mono" font-size="8.5">8. Output Stage</text>
 
-        <!-- Supporting Layers (Stages 3,4,5,6,7) -->
-        <!-- 3: V/I Monitor -->
         <rect x="15" y="95" width="145" height="35" rx="4" fill="${state.activeCapability === 3 ? 'rgba(245,166,35,0.2)' : 'rgba(255,255,255,0.03)'}" stroke="rgba(255,255,255,0.15)"/>
         <text x="87" y="117" text-anchor="middle" fill="#CBD5E1" font-family="JetBrains Mono" font-size="8">3. V/I Monitoring</text>
 
-        <!-- 4: Programmable Parameters -->
         <rect x="180" y="95" width="145" height="35" rx="4" fill="${state.activeCapability === 4 ? 'rgba(245,166,35,0.2)' : 'rgba(255,255,255,0.03)'}" stroke="rgba(255,255,255,0.15)"/>
         <text x="252" y="117" text-anchor="middle" fill="#CBD5E1" font-family="JetBrains Mono" font-size="8">4. Parameters Setup</text>
 
-        <!-- 5: Protection & Fault Manager -->
         <rect x="15" y="140" width="145" height="35" rx="4" fill="${state.faultActive ? 'rgba(239,68,68,0.4)' : state.activeCapability === 5 ? 'rgba(245,166,35,0.2)' : 'rgba(255,255,255,0.03)'}" stroke="${state.faultActive ? '#EF4444' : 'rgba(255,255,255,0.15)'}"/>
         <text x="87" y="162" text-anchor="middle" fill="${state.faultActive ? '#EF4444' : '#CBD5E1'}" font-family="JetBrains Mono" font-size="8" font-weight="${state.faultActive ? '700' : '400'}">5. Fault Protection</text>
 
-        <!-- 6: Data Acquisition & Logging -->
         <rect x="180" y="140" width="145" height="35" rx="4" fill="${state.activeCapability === 6 ? 'rgba(245,166,35,0.2)' : 'rgba(255,255,255,0.03)'}" stroke="rgba(255,255,255,0.15)"/>
         <text x="252" y="162" text-anchor="middle" fill="#CBD5E1" font-family="JetBrains Mono" font-size="8">6. Data Logger</text>
 
-        <!-- 7: User Interface / Comms -->
         <rect x="15" y="185" width="310" height="32" rx="4" fill="${state.activeCapability === 7 ? 'rgba(0,229,255,0.2)' : 'rgba(255,255,255,0.03)'}" stroke="rgba(0,229,255,0.3)"/>
         <text x="170" y="206" text-anchor="middle" fill="#00E5FF" font-family="JetBrains Mono" font-size="8.5">7. Digital Telemetry & Comms Interface</text>
 
-        <!-- Internal Signal Lines -->
         <path d="M 110 60 L 120 60 M 220 60 L 230 60" fill="none" stroke="${state.faultActive ? '#EF4444' : '#00E5FF'}" stroke-width="2" class="${state.faultActive ? '' : 'flowing-line'}"/>
       </g>
     `;
 
-    // 3. Draw Output Destination Stage (Right)
     const loadName = state.targetLoad === 'balloon' ? 'STRATOSPHERIC PAYLOAD' : state.targetLoad === 'soldier' ? 'SOLDIER FIELD GEAR' : 'AVIONICS TEST RIG';
     const loadVolt = state.targetLoad === 'balloon' ? '12.0 V Li-Ion' : state.targetLoad === 'soldier' ? '5.0 V Tactical USB' : '24.0 V Lab Bus';
 
     svgContent += `
       <g transform="translate(680, 80)">
-        <!-- Conduit from Controller to Load -->
         <path d="M -40 85 L 30 85" fill="none" stroke="${state.faultActive ? '#64748B' : '#10B981'}" stroke-width="3" class="${state.faultActive ? '' : 'flowing-line'}"/>
         
-        <!-- Target Load Module -->
         <rect x="30" y="10" width="160" height="150" rx="8" fill="url(#controllerGrad)" stroke="${state.faultActive ? '#64748B' : '#10B981'}" stroke-width="2"/>
         
         <circle cx="110" cy="50" r="22" fill="rgba(16,185,129,0.15)" stroke="#10B981" stroke-width="1.5"/>
@@ -407,12 +552,11 @@ function initSimulatorEngine() {
     svgCanvas.innerHTML = svgContent;
   }
 
-  // Initial Render
   renderSimulation();
 }
 
 /* ==========================================================================
-   4. RFQ Intake & Technical Discussion Dispatcher
+   6. RFQ Intake & Technical Discussion Dispatcher
    ========================================================================== */
 function initRfqHandler() {
   const form = document.getElementById('rfq-form');
