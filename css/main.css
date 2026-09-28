@@ -77,6 +77,7 @@ svg { display: block; }
 
 .section {
   padding: 88px 0;
+  scroll-margin-top: 88px;
 }
 .section--tight { padding: 56px 0; }
 .section--tint { background: var(--paper-tint); }
@@ -176,6 +177,7 @@ svg { display: block; }
   justify-content: space-between;
   height: var(--header-h);
   gap: 16px;
+  max-width: 1360px;
 }
 .brand {
   display: flex;
@@ -209,7 +211,7 @@ svg { display: block; }
 .nav-links {
   display: flex;
   align-items: center;
-  gap: 2px;
+  gap: 0;
   flex: 1;
   justify-content: center;
 }
@@ -217,12 +219,13 @@ svg { display: block; }
 .nav-link {
   display: flex;
   align-items: center;
-  gap: 5px;
-  padding: 10px 14px;
-  font-size: 0.92rem;
+  gap: 4px;
+  padding: 10px 9px;
+  font-size: 0.86rem;
   font-weight: 500;
   color: var(--slate);
   border-radius: var(--radius-sm);
+  white-space: nowrap;
   transition: color 0.15s ease, background-color 0.15s ease;
 }
 .nav-link:hover { color: var(--navy); background: var(--blue-soft); }
@@ -232,7 +235,7 @@ svg { display: block; }
 
 .dropdown {
   position: absolute;
-  top: calc(100% + 6px);
+  top: 100%;
   left: 0;
   min-width: 240px;
   background: #fff;

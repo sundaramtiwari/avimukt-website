@@ -2,6 +2,23 @@
 (function () {
   "use strict";
 
+  /* Landing on a page with a #hash (breadcrumbs, nav dropdown deep links):
+     force an instant jump instead of the CSS `scroll-behavior: smooth`
+     animation, which web-font/image reflow can interrupt partway and leave
+     the page stuck at the top. Runs immediately (script is at the end of
+     <body>, before window "load") so it applies before that first jump.
+     Restored once the page has fully settled so later same-page anchor
+     clicks (e.g. clicking "Innovations" while already on this page) still
+     scroll smoothly. */
+  if (window.location.hash) {
+    document.documentElement.style.scrollBehavior = "auto";
+    window.addEventListener("load", function () {
+      setTimeout(function () {
+        document.documentElement.style.scrollBehavior = "";
+      }, 400);
+    });
+  }
+
   document.addEventListener("DOMContentLoaded", function () {
     initMobileNav();
     initDesktopDropdownA11y();
@@ -11,7 +28,32 @@
     initAccordion();
     initContactForm();
     initYear();
+    initHashScrollFix();
   });
+
+  /* ---------------- Reliable scroll-to-anchor on page load ----------------
+     Cross-page links (e.g. breadcrumbs, nav dropdowns) navigate to a new
+     document with a #hash. The browser's native jump-to-anchor can land in
+     the wrong place or get cancelled if web fonts / lazy images shift the
+     layout while it's still settling, especially with `scroll-behavior:
+     smooth` on <html>. Re-assert the correct position once the page (and
+     its fonts/images) have actually finished loading. */
+  function initHashScrollFix() {
+    if (!window.location.hash) return;
+    var id = window.location.hash.slice(1);
+    var target;
+    try { target = document.getElementById(id); } catch (e) { target = null; }
+    if (!target) return;
+
+    function scrollToTarget() {
+      target.scrollIntoView({ behavior: "auto", block: "start" });
+    }
+
+    scrollToTarget();
+    requestAnimationFrame(function () { requestAnimationFrame(scrollToTarget); });
+    window.addEventListener("load", scrollToTarget);
+    setTimeout(scrollToTarget, 350);
+  }
 
   /* ---------------- Mobile nav ---------------- */
   function initMobileNav() {
